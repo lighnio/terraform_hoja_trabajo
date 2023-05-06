@@ -1,0 +1,68 @@
+terraform apply                                                                                                                   ─╯
+aws_eip.nat: Refreshing state... [id=eipalloc-0b6cd7b7918089d75]
+aws_vpc.this: Refreshing state... [id=vpc-0616c025468d45542]
+aws_internet_gateway.this: Refreshing state... [id=igw-0f6dbf73bc9607f65]
+aws_subnet.subred-publica: Refreshing state... [id=subnet-0a0575ef74dd5c57e]
+aws_nat_gateway.nat: Refreshing state... [id=nat-0fcbdc25c3d076c41]
+aws_route_table.tabla_enrutamiento_internet_gateway: Refreshing state... [id=rtb-043931da95d84f10c]
+aws_route_table.nat_gateway_privada: Refreshing state... [id=rtb-0afd2b96e630788c3]
+aws_route_table_association.tabla-enrutamiento-1: Refreshing state... [id=rtbassoc-0d321523ab2d106f4]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following
+symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_route_table_association.rt1 will be created
+  + resource "aws_route_table_association" "rt1" {
+      + id             = (known after apply)
+      + route_table_id = "rtb-0afd2b96e630788c3"
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_subnet.subred-privada will be created
+  + resource "aws_subnet" "subred-privada" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1b"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.0.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                 = (known after apply)
+      + ipv6_native                                    = false
+      + map_public_ip_on_launch                        = false
+      + owner_id                                       = (known after apply)
+      + private_dns_hostname_type_on_launch            = (known after apply)
+      + tags                                           = {
+          + "Environment" = "dev"
+          + "Name"        = "hoja-trabajo-terraform-cv-subred-publica"
+          + "Path"        = "terraform/06-subred-privada.tf"
+        }
+      + tags_all                                       = {
+          + "Environment" = "dev"
+          + "Name"        = "hoja-trabajo-terraform-cv-subred-publica"
+          + "Path"        = "terraform/06-subred-privada.tf"
+        }
+      + vpc_id                                         = "vpc-0616c025468d45542"
+    }
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_subnet.subred-privada: Creating...
+╷
+│ Error: creating EC2 Subnet: InvalidSubnet.Conflict: The CIDR '10.0.0.0/24' conflicts with another subnet
+│       status code: 400, request id: 87ddd7fc-c765-4c43-98c6-0d2790646a4c
+│ 
+│   with aws_subnet.subred-privada,
+│   on 06-subred-privada.tf line 1, in resource "aws_subnet" "subred-privada":
+│    1: resource "aws_subnet" "subred-privada" {
